@@ -23,13 +23,13 @@ The board below combines:
 - Official leaderboard entries visible in the shared snapshot.
 - Additional self-evaluated entries that are **not yet listed** on the official board.
 
-| Model | % Resolved | Source | Official Board Status |
-|---|---:|---|---|
-| Sonnet 4.6 | 79.60 | Self-evaluated | Not listed on official board |
-| wecode (multi-agent, based on Codex) | 79.20 | Self-evaluated | Not listed on official board |
-| live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 | Official snapshot | Listed |
-| Sonar Foundation Agent + Claude 4.5 Opus | 79.20 | Official snapshot | Listed |
-| TRAE + Doubao-Seed-Code | 78.80 | Official snapshot | Listed |
-| live-SWE-agent + Gemini 3 Pro Preview (2025-11-18) | 77.40 | Official snapshot | Listed |
+| Model | % Resolved | Source |
+|---|---:|---|
+| Sonnet 4.6 | 79.60 | Self-evaluated |
+| wecode (multi-agent, based on Codex 5.3 xhigh) | 79.20 | Self-evaluated |
+| live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 | Official snapshot |
+| Sonar Foundation Agent + Claude 4.5 Opus | 79.20 | Official snapshot |
+| TRAE + Doubao-Seed-Code | 78.80 | Official snapshot |
+| live-SWE-agent + Gemini 3 Pro Preview (2025-11-18) | 77.40 | Official snapshot |
 
 > Note: This repository intentionally keeps architecture details high-level.
