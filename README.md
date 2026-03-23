@@ -28,7 +28,7 @@ The board below combines:
 | Sonnet 4.6 | 79.60 | Self-evaluated |
 | wecode (multi-agent, based on Codex 5.3 xhigh) | 79.20 | Self-evaluated |
 | live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 | Official snapshot |
-| Sonar Foundation Agent + Claude 4.5 Opus | 79.20 | Official snapshot |
+| Sonar Foundation Agent + Claude 4.5 Opus | 79.20 | Self-evaluated |
 | TRAE + Doubao-Seed-Code | 78.80 | Official snapshot |
 | live-SWE-agent + Gemini 3 Pro Preview (2025-11-18) | 77.40 | Official snapshot |
 
