@@ -22,6 +22,7 @@ wecode is designed for engineering teams that need higher execution speed and cl
 The board below combines:
 - Official leaderboard entries visible in the shared snapshot.
 - Additional self-evaluated entries that are **not yet listed** on the official board.
+- We have evaluated oue wecode and get 79.20% resolved.
 
 | Model | % Resolved | Source |
 |---|---:|---|
