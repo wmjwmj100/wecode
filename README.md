@@ -94,7 +94,7 @@ The board below combines:
 | Model | % Resolved |
 |---|---:|
 | Sonnet 4.6 | 79.60 |
-| wecode (multi-agent, based on Codex) | 79.20 |
+| wecode (multi-agent, based on GPT 5.2) | 79.20 |
 | live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 |
 | Sonar Foundation Agent + Claude 4.5 Opus | 79.20 |
 | TRAE + Doubao-Seed-Code | 78.80 |
