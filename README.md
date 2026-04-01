@@ -1,45 +1,117 @@
 ﻿# wecode
 
-Language / 语言: **[English (Default)](#english-default)** | [中文](#中文)
+Language / 语言: **English** | [中文速览](#chinese-summary)
 
 <div align="center">
-
-[![Release](https://img.shields.io/github/v/release/wmjwmj100/wecode?label=release)](https://github.com/wmjwmj100/wecode/releases)
-[![Platform](https://img.shields.io/badge/platform-Windows%20x64-2d6cdf)](https://github.com/wmjwmj100/wecode/releases)
-[![Architecture](https://img.shields.io/badge/architecture-Multi--Agent-0f766e)](#what-makes-wecode-different)
-[![Benchmark](https://img.shields.io/badge/self--eval-79.20-1d4ed8)](#benchmark-snapshot)
-
-Multi-agent coding on Codex, upgraded for high-throughput collaboration.
-
-[Download Binary](https://github.com/wmjwmj100/wecode/releases) • [Benchmark](#benchmark-snapshot) • [Roadmap](#roadmap)
-
+  <img src="./images/hero-banner.png" alt="WeCode hero banner" width="100%" />
+  <br />
+  <br />
+  <a href="https://github.com/wmjwmj100/wecode/releases"><img src="https://img.shields.io/github/v/release/wmjwmj100/wecode?style=for-the-badge&logo=github&label=release" alt="Latest release" /></a>
+  <a href="https://github.com/wmjwmj100/wecode"><img src="https://img.shields.io/github/stars/wmjwmj100/wecode?style=for-the-badge&logo=github&label=stars" alt="GitHub stars" /></a>
+  <img src="https://img.shields.io/badge/swarm-multi--agent-0f766e?style=for-the-badge" alt="Swarm multi-agent" />
+  <img src="https://img.shields.io/badge/platform-Windows%20x64-111827?style=for-the-badge" alt="Windows x64" />
+  <img src="https://img.shields.io/badge/SWE--bench-79.20%25-1d4ed8?style=for-the-badge" alt="SWE-bench 79.20%" />
+  <br />
+  <br />
+  <strong>Swarm-native coding on Codex.</strong>
+  <br />
+  WeCode runs multiple cooperating agents in parallel so exploration, review, and execution do not collapse into one brittle trace.
+  <br />
+  <br />
+  <a href="https://github.com/wmjwmj100/wecode/releases">Download Binary</a>
+  ·
+  <a href="#why-swarm-not-one-agent">Why Swarm</a>
+  ·
+  <a href="#how-the-swarm-executes">Architecture</a>
+  ·
+  <a href="#benchmark-snapshot">Benchmark</a>
+  ·
+  <a href="#quick-start">Quick Start</a>
 </div>
+
+> README visuals are now sourced from the generated images in [`images/`](./images).
 
 ---
 
-## English (Default)
+## Built For Hard Engineering Work
 
-### Product Positioning
+WeCode is a multi-agent coding system built on Codex for teams that care about execution speed, collaboration quality, and delivery stability. Instead of forcing one model to plan, inspect, code, test, and review in a single chain, WeCode lets a swarm of agents split the work, share memory, and cross-check each other before converging on an answer.
 
-wecode is a multi-agent coding system built on Codex for teams that care about execution speed, collaboration quality, and delivery stability.
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <strong>Parallel reconnaissance</strong><br />
+      Multiple agents inspect different parts of the codebase at the same time, which reduces blind spots and shortens time-to-context.
+    </td>
+    <td width="33%" valign="top">
+      <strong>Shared working memory</strong><br />
+      Findings are written into a common space so later agents can start from the current state of understanding instead of rebuilding it.
+    </td>
+    <td width="33%" valign="top">
+      <strong>Cross-agent verification</strong><br />
+      Agents challenge each other's assumptions before the final answer is produced, which makes long-horizon tasks more stable.
+    </td>
+  </tr>
+</table>
 
-This project does **not** follow a fixed workflow template. Instead, we use **MARL (Multi-Agent Reinforcement Learning)** to strengthen agent-to-agent coordination so collaboration can adapt to task context in real time.
+## Why Swarm Not One Agent?
 
-### What Makes wecode Different
+Most coding agents are still one model wearing many hats. That works for short, local edits, but performance degrades when the task becomes ambiguous, cross-cutting, or unfamiliar. WeCode is designed for the cases where a single uninterrupted reasoning trace is the failure mode.
 
-- **MARL-enhanced collaboration:** reinforcement learning improves cross-agent decision quality and coordination efficiency.
-- **Full-connectivity communication:** agents can exchange context directly instead of operating as isolated workers.
-- **Society-inspired cooperation:** collaboration behavior is designed to resemble human-team dynamics: division of labor, synchronization, feedback, and correction.
-- **Operator-visible process:** debug traces and role-based views make collaboration readable during parallel execution.
+| Problem Shape | Single-Agent Flow | WeCode Swarm |
+|---|---|---|
+| Small bug fix | Usually fast | Usually fast |
+| Unknown codebase | Sequential exploration | Parallel repo reconnaissance |
+| Multi-file refactor | Context becomes fragile | Agents divide scope and compare notes |
+| Architecture change | One chain loses the thread | Shared memory preserves the big picture |
+| Ambiguous requirement | First interpretation tends to stick | Disagreement surfaces early |
 
-### Benchmark Snapshot
+## How the Swarm Executes
 
-The table below includes models visible in shared snapshots and self-evaluated entries that are not yet officially listed.
+<p align="center">
+  <img src="./images/swarm-architecture.png" alt="Swarm architecture diagram" width="100%" />
+</p>
 
-| Model | % Resolved |
+1. **Split the search space.** Agents explore different files, hypotheses, and failure modes in parallel.
+2. **Write to shared memory.** Useful findings are published so other agents can build on them immediately.
+3. **Cross-check before converge.** Proposed fixes are challenged by peers instead of being accepted by default.
+4. **Return one coherent result.** The user sees a single output backed by distributed investigation.
+
+### Coordination Patterns We Care About
+
+- **Spontaneous role division:** agents naturally specialize when duplicate work becomes wasteful.
+- **Proactive unblocking:** one agent often provides missing context before another explicitly asks.
+- **Self-correction through critique:** weak assumptions are more likely to be exposed before they reach the user.
+- **Adaptive planning:** collaboration order emerges from the task instead of being hard-coded into a rigid pipeline.
+
+## Observability
+
+<p align="center">
+  <img src="./images/observability.png" alt="Observability view" width="100%" />
+</p>
+
+WeCode is designed to make collaboration legible, not hidden. The current public presentation focuses on four things:
+
+- **Per-agent timelines:** inspect what each agent was doing and when it switched focus.
+- **Communication log:** see messages, blockers, and handoffs across the swarm.
+- **Shared-memory snapshots:** understand what the colony collectively knew at each stage.
+- **Replay-friendly traces:** reconstruct how the final answer emerged from parallel work.
+
+<details>
+  <summary><strong>Design note</strong></summary>
+
+WeCode does not depend on a fixed planner-worker template. The coordination layer is closer to MARL-style adaptation: agents react to the changing task state, each other, and the shared workspace rather than obeying one pre-written script.
+
+</details>
+
+## Benchmark Snapshot
+
+The table below keeps the public snapshot concise and clearly labels WeCode as a self-evaluated entry. The point is not only raw model quality. The point is that collaboration architecture materially changes how well the system handles broad, messy engineering tasks.
+
+| System | % Resolved |
 |---|---:|
 | Sonnet 4.6 | 79.60 |
-| wecode (multi-agent, based on Codex) | 79.20 |
+| WeCode (multi-agent on Codex) | 79.20 |
 | live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 |
 | Sonar Foundation Agent + Claude 4.5 Opus | 79.20 |
 | TRAE + Doubao-Seed-Code | 78.80 |
@@ -50,66 +122,67 @@ The table below includes models visible in shared snapshots and self-evaluated e
 | ACoder | 76.40 |
 | mini-SWE-agent + Gemini 3 Flash (high reasoning) | 75.80 |
 
-### Roadmap
+> `WeCode` is currently shown here as a public self-evaluated snapshot. Update this section once an official leaderboard submission is published.
 
-Next, we will extend the multi-agent collaboration engine into **financial-domain scenarios**, focusing on higher-reliability collaboration for analysis-heavy and decision-sensitive tasks.
-
-### Quick Start
+## Quick Start
 
 ```powershell
 # 1) Download the latest Windows binary from Releases
-# 2) Run wecode
+# 2) Launch WeCode
 .\wecode-windows-x64.exe
-# 3) Start with a concrete engineering goal
+
+# 3) Give the swarm a concrete engineering goal
+#    Example: fix a failing test, inspect a regression, or plan a refactor
 ```
 
-### Release
+Current public distribution:
 
-- GitHub Releases: `https://github.com/wmjwmj100/wecode/releases`
+- Windows x64 binary via [GitHub Releases](https://github.com/wmjwmj100/wecode/releases)
+- Binary publishing notes in [BINARY_UPLOAD.md](./BINARY_UPLOAD.md)
 
----
+## Roadmap
 
-## 中文
+- [x] Core swarm runtime
+- [x] Shared blackboard communication
+- [x] Readable cross-agent execution traces
+- [ ] Web UI for live swarm observation
+- [ ] Custom specialist profiles
+- [ ] Strategy self-critique during long-horizon runs
+- [ ] Domain packs for analysis-heavy workflows, including finance
+- [ ] Multi-repo task execution
 
-### 产品定位
+## Contributing
 
-wecode 是一个基于 Codex 的多智能体编程系统，面向追求执行效率、协作质量与交付稳定性的工程团队。
+WeCode is still early. The most useful contributions right now are concrete failures, surprising coordination wins, and trace-backed bug reports.
 
-我们**不采用固定工作流模板**。相反，我们通过 **MARL（多智能体强化学习）** 增强智能体间协作能力，使协同方式能够根据任务上下文实时自适应。
+- Open issues: [github.com/wmjwmj100/wecode/issues](https://github.com/wmjwmj100/wecode/issues)
+- Follow releases: [github.com/wmjwmj100/wecode/releases](https://github.com/wmjwmj100/wecode/releases)
 
-### wecode 的核心差异
+<a id="chinese-summary"></a>
 
-- **MARL 强化协作：** 通过强化学习持续优化跨智能体决策与协同效率。
-- **全连接通信：** 智能体之间可以直接交换上下文，而不是孤立执行。
-- **类人类社会协作：** 协作模式更接近真实人类团队，包括分工、同步、反馈与纠偏。
-- **过程可见：** 在并行执行下可通过调试轨迹与角色视图清晰观察协作过程。
+## Chinese Summary
 
-### 榜单快照
+WeCode 是一个基于 Codex 的多智能体编程系统。它不是让一个模型串行完成“理解代码、制定方案、修改、验证、复盘”全部流程，而是让多个智能体并行探索、共享上下文、互相校验，再汇总成一个最终结果。
 
-下表包含截图中可见条目，以及尚未进入官方榜单的自测结果。
+### 中文速览
 
-| 模型 | 任务解决率 |
-|---|---:|
-| Sonnet 4.6 | 79.60 |
-| wecode（基于 Codex 的多智能体） | 79.20 |
+- **并行探索：** 多个智能体同时查看不同文件、路径和假设，缩短进入上下文的时间。
+- **共享记忆：** 发现会写入公共工作区，后来加入的智能体不需要从零开始。
+- **交叉验证：** 方案在收敛前会经过同伴挑战，而不是默认接受第一版答案。
+- **过程可见：** README 中的视觉区块预留了架构图、观测视图和后续截图位置，方便你继续补完整个 GitHub 首页。
 
-### 路线图
-
-下一步我们将把多智能体协作能力扩展到**金融领域**，面向分析密集、决策敏感场景提升协作可靠性。
-
-### 快速开始
+### 中文快速开始
 
 ```powershell
-# 1) 从 Releases 下载最新 Windows 二进制
-# 2) 启动 wecode
+# 1) 从 Releases 下载最新 Windows x64 二进制
+# 2) 运行 WeCode
 .\wecode-windows-x64.exe
-# 3) 输入明确的工程目标开始使用
+
+# 3) 输入一个明确的工程目标开始使用
 ```
 
-### 发布信息
+### 中文说明
 
-- GitHub Releases：`https://github.com/wmjwmj100/wecode/releases`
-
----
-
-> Note: Internal implementation details remain high-level in this public repository.
+- 当前 README 图片已切换到 `images/*.png`，后续可继续直接替换同路径文件。
+- 当前基准部分沿用仓库里已有的公开快照写法，并明确标注了 `WeCode` 为自测条目。
+- 公共仓库暂时只保留高层说明，不展开内部实现细节。
