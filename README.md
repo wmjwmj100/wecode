@@ -9,13 +9,14 @@ Language / 语言: **English** | [中文速览](#chinese-summary)
   <a href="https://github.com/wmjwmj100/wecode/releases"><img src="https://img.shields.io/github/v/release/wmjwmj100/wecode?style=for-the-badge&logo=github&label=release" alt="Latest release" /></a>
   <a href="https://github.com/wmjwmj100/wecode"><img src="https://img.shields.io/github/stars/wmjwmj100/wecode?style=for-the-badge&logo=github&label=stars" alt="GitHub stars" /></a>
   <img src="https://img.shields.io/badge/swarm-multi--agent-0f766e?style=for-the-badge" alt="Swarm multi-agent" />
+  <img src="https://img.shields.io/badge/topology-agent--to--agent-F59E0B?style=for-the-badge" alt="Agent-to-agent topology" />
   <img src="https://img.shields.io/badge/platform-Windows%20x64-111827?style=for-the-badge" alt="Windows x64" />
   <img src="https://img.shields.io/badge/SWE--bench-79.20%25-1d4ed8?style=for-the-badge" alt="SWE-bench 79.20%" />
   <br />
   <br />
   <strong>Swarm-native coding on Codex.</strong>
   <br />
-  WeCode runs multiple cooperating agents in parallel so exploration, review, and execution do not collapse into one brittle trace.
+  WeCode runs agents as peers: direct agent-to-agent communication plus a shared blackboard, not a brittle planner-worker tree.
   <br />
   <br />
   <a href="https://github.com/wmjwmj100/wecode/releases">Download Binary</a>
@@ -35,7 +36,9 @@ Language / 语言: **English** | [中文速览](#chinese-summary)
 
 ## Built For Hard Engineering Work
 
-WeCode is a multi-agent coding system built on Codex for teams that care about execution speed, collaboration quality, and delivery stability. Instead of forcing one model to plan, inspect, code, test, and review in a single chain, WeCode lets a swarm of agents split the work, share memory, and cross-check each other before converging on an answer.
+WeCode is a multi-agent coding system built on Codex for teams that care about execution speed, collaboration quality, and delivery stability. Instead of forcing one model to plan, inspect, code, test, and review in a single chain, WeCode lets a swarm of agents split the work, message each other directly, write to shared memory, and cross-check each other before converging on an answer.
+
+The key architectural claim is simple: strong collaboration does not look like a tree. Human teams do not route every question, blocker, or correction through one manager. They talk laterally, keep shared notes, challenge each other, and re-form around the task. WeCode is built around that same advantage.
 
 <table>
   <tr>
@@ -48,23 +51,40 @@ WeCode is a multi-agent coding system built on Codex for teams that care about e
       Findings are written into a common space so later agents can start from the current state of understanding instead of rebuilding it.
     </td>
     <td width="33%" valign="top">
-      <strong>Cross-agent verification</strong><br />
-      Agents challenge each other's assumptions before the final answer is produced, which makes long-horizon tasks more stable.
+      <strong>Peer-to-peer coordination</strong><br />
+      Agents do not have to relay everything through a root planner. They can directly ask, challenge, warn, and synchronize with each other.
     </td>
   </tr>
 </table>
 
 ## Why Swarm Not One Agent?
 
-Most coding agents are still one model wearing many hats. That works for short, local edits, but performance degrades when the task becomes ambiguous, cross-cutting, or unfamiliar. WeCode is designed for the cases where a single uninterrupted reasoning trace is the failure mode.
+Most coding agents are still one model wearing many hats. Even many "multi-agent" systems are still planner-worker trees in disguise: one top-level agent delegates, everyone reports upward, and lateral correction is weak or absent. That works for short, local edits, but performance degrades when the task becomes ambiguous, cross-cutting, or unfamiliar. WeCode is designed for the cases where a single uninterrupted reasoning trace or a single coordination bottleneck becomes the failure mode.
 
-| Problem Shape | Single-Agent Flow | WeCode Swarm |
+| Problem Shape | Tree / Single-Agent Flow | WeCode Swarm |
 |---|---|---|
 | Small bug fix | Usually fast | Usually fast |
 | Unknown codebase | Sequential exploration | Parallel repo reconnaissance |
 | Multi-file refactor | Context becomes fragile | Agents divide scope and compare notes |
 | Architecture change | One chain loses the thread | Shared memory preserves the big picture |
 | Ambiguous requirement | First interpretation tends to stick | Disagreement surfaces early |
+| Coordination topology | Planner-to-worker or solo trace | Peer-to-peer agents plus blackboard |
+
+## Peer Network, Not A Tree
+
+Traditional multi-agent coding stacks usually behave like org charts: one planner decomposes work, workers execute, and information climbs back up the same chain. That structure is easy to reason about, but it creates exactly the bottlenecks you would expect:
+
+- The planner becomes the throughput ceiling.
+- Workers discover things that should affect peers, but the signal has to travel upward before it can travel sideways.
+- Local disagreements get flattened too early, so weak assumptions survive longer than they should.
+
+WeCode is built around a different coordination model:
+
+- **Agent-to-agent first:** any agent can directly contact another when it finds a dependency, blocker, contradiction, or relevant clue.
+- **Shared blackboard second:** durable findings are written into common memory so the rest of the swarm can re-anchor on the latest state.
+- **Human-like collaboration advantage:** this combines private conversations with public team memory, which is much closer to how strong engineering teams actually work.
+
+The result is not just "more agents." It is a step change in how collaboration happens. Instead of one lead mind serializing the whole task, WeCode behaves more like a high-performance team: specialists form local loops, synchronize through shared notes, and correct each other before the final answer hardens.
 
 ## How the Swarm Executes
 
@@ -73,9 +93,10 @@ Most coding agents are still one model wearing many hats. That works for short, 
 </p>
 
 1. **Split the search space.** Agents explore different files, hypotheses, and failure modes in parallel.
-2. **Write to shared memory.** Useful findings are published so other agents can build on them immediately.
-3. **Cross-check before converge.** Proposed fixes are challenged by peers instead of being accepted by default.
-4. **Return one coherent result.** The user sees a single output backed by distributed investigation.
+2. **Talk laterally.** Agents message each other directly when a discovery should change someone else's work right now.
+3. **Write to the blackboard.** Durable findings are published to shared memory so the whole swarm can build on them.
+4. **Cross-check before converge.** Proposed fixes are challenged by peers instead of being accepted by default.
+5. **Return one coherent result.** The user sees a single output backed by distributed investigation.
 
 ### Coordination Patterns We Care About
 
@@ -93,14 +114,14 @@ Most coding agents are still one model wearing many hats. That works for short, 
 WeCode is designed to make collaboration legible, not hidden. The current public presentation focuses on four things:
 
 - **Per-agent timelines:** inspect what each agent was doing and when it switched focus.
-- **Communication log:** see messages, blockers, and handoffs across the swarm.
-- **Shared-memory snapshots:** understand what the colony collectively knew at each stage.
+- **Agent-to-agent communication log:** see direct messages, blockers, escalation, and handoffs across the swarm.
+- **Shared-blackboard snapshots:** understand what the colony collectively knew at each stage.
 - **Replay-friendly traces:** reconstruct how the final answer emerged from parallel work.
 
 <details>
   <summary><strong>Design note</strong></summary>
 
-WeCode does not depend on a fixed planner-worker template. The coordination layer is closer to MARL-style adaptation: agents react to the changing task state, each other, and the shared workspace rather than obeying one pre-written script.
+WeCode does not depend on a fixed planner-worker template. The coordination layer is closer to MARL-style adaptation: agents react to the changing task state, each other, direct agent-to-agent messages, and the shared workspace rather than obeying one pre-written script.
 
 </details>
 
@@ -162,13 +183,14 @@ WeCode is still early. The most useful contributions right now are concrete fail
 
 ## Chinese Summary
 
-WeCode 是一个基于 Codex 的多智能体编程系统。它不是让一个模型串行完成“理解代码、制定方案、修改、验证、复盘”全部流程，而是让多个智能体并行探索、共享上下文、互相校验，再汇总成一个最终结果。
+WeCode 是一个基于 Codex 的多智能体编程系统。它不是让一个模型串行完成“理解代码、制定方案、修改、验证、复盘”全部流程，也不是传统的树状 planner-worker 分发结构，而是让多个智能体并行探索、直接彼此通信、写入共享黑板、互相校验，再汇总成一个最终结果。
 
 ### 中文速览
 
 - **并行探索：** 多个智能体同时查看不同文件、路径和假设，缩短进入上下文的时间。
-- **共享记忆：** 发现会写入公共工作区，后来加入的智能体不需要从零开始。
-- **交叉验证：** 方案在收敛前会经过同伴挑战，而不是默认接受第一版答案。
+- **Agent to agent 通信：** 智能体之间可以直接沟通依赖、阻塞和分歧，不需要先汇报给上层再转发。
+- **共享黑板：** 关键发现会写入公共工作区，后来加入的智能体不需要从零开始。
+- **类人协作优势：** 这更接近强工程团队的工作方式，既有私下快速同步，也有公共知识沉淀和同伴纠错。
 - **过程可见：** README 中的视觉区块预留了架构图、观测视图和后续截图位置，方便你继续补完整个 GitHub 首页。
 
 ### 中文快速开始
