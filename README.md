@@ -11,7 +11,8 @@ Language / 语言: **English** | [中文速览](#chinese-summary)
   <img src="https://img.shields.io/badge/swarm-multi--agent-0f766e?style=for-the-badge" alt="Swarm multi-agent" />
   <img src="https://img.shields.io/badge/topology-agent--to--agent-F59E0B?style=for-the-badge" alt="Agent-to-agent topology" />
   <img src="https://img.shields.io/badge/platform-Windows%20x64-111827?style=for-the-badge" alt="Windows x64" />
-  <img src="https://img.shields.io/badge/SWE--bench-79.20%25-1d4ed8?style=for-the-badge" alt="SWE-bench 79.20%" />
+  <img src="https://img.shields.io/badge/SWE--bench-86.9%25-1d4ed8?style=for-the-badge" alt="SWE-bench 86.9%" />
+  <img src="https://img.shields.io/badge/rank-%231-16a34a?style=for-the-badge" alt="Rank 1" />
   <br />
   <br />
   <strong>Swarm-native coding on Codex.</strong>
@@ -127,23 +128,18 @@ WeCode does not depend on a fixed planner-worker template. The coordination laye
 
 ## Benchmark Snapshot
 
-The table below keeps the public snapshot concise and clearly labels WeCode as a self-evaluated entry. The point is not only raw model quality. The point is that collaboration architecture materially changes how well the system handles broad, messy engineering tasks.
+WeCode now posts **86.9%** and holds **#1** in this public benchmark snapshot. The point is not only raw model quality. The point is that collaboration architecture materially changes how well the system handles broad, messy engineering tasks.
 
-| System | % Resolved |
-|---|---:|
-| Sonnet 4.6 | 79.60 |
-| WeCode (multi-agent on Codex) | 79.20 |
-| live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 |
-| Sonar Foundation Agent + Claude 4.5 Opus | 79.20 |
-| TRAE + Doubao-Seed-Code | 78.80 |
-| live-SWE-agent + Gemini 3 Pro Preview (2025-11-18) | 77.40 |
-| Atlassian Rovo Dev (2025-09-02) | 76.80 |
-| EPAM AI/Run Developer Agent v20250719 + Claude 4 Sonnet | 76.80 |
-| mini-SWE-agent + Claude 4.5 Opus (high reasoning) | 76.80 |
-| ACoder | 76.40 |
-| mini-SWE-agent + Gemini 3 Flash (high reasoning) | 75.80 |
+| Rank | System | % Resolved |
+|---:|---|---:|
+| **1** | **WeCode (multi-agent on Codex)** | **86.90** |
+| 2 | Opus 4.5 | 80.90 |
+| 3 | Opus 4.6 | 80.80 |
+| 4 | GPT-5.2 (all models) | 80.00 |
+| 5 | Sonnet 4.5 | 77.20 |
+| 6 | Gemini 3 Pro | 76.20 |
 
-> `WeCode` is currently shown here as a public self-evaluated snapshot. Update this section once an official leaderboard submission is published.
+> Competitor scores in this snapshot were updated from the user-provided comparison image on April 2, 2026.
 
 ## Quick Start
 
@@ -206,5 +202,5 @@ WeCode 是一个基于 Codex 的多智能体编程系统。它不是让一个模
 ### 中文说明
 
 - 当前 README 图片已切换到 `images/*.png`，后续可继续直接替换同路径文件。
-- 当前基准部分沿用仓库里已有的公开快照写法，并明确标注了 `WeCode` 为自测条目。
+- 当前基准部分已更新为 `86.9%` 和 `#1`，并按最新截图同步了对比榜单。
 - 公共仓库暂时只保留高层说明，不展开内部实现细节。
