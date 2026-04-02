@@ -135,10 +135,10 @@ Evidence:
 
 | Rank | Model | % Resolved | Org | Date | Site |
 |---:|---|---:|---|---|---|
-| **1** | **WeCode (multi-agent on Codex)** | **86.90** | **WeCode** | **2026-04-02** | **[Evidence](./for_github_public.zip)** |
-| 2 | agent + Opus 4.6 | 80.80 | Anthropic | 2026-04-02 | [Anthropic](https://www.anthropic.com/) |
-| 3 | GPT-5.2 | 80.00 | OpenAI | 2026-04-02 | [OpenAI](https://openai.com/) |
-| 4 | Sonnet 4.6 | 79.60 | Anthropic | 2026-04-02 | [Anthropic](https://www.anthropic.com/) |
+| **1** | **WeCode (multi-agent on Codex)** | **86.90** | **WeCode** | **2026-03-27** | **[Evidence](./for_github_public.zip)** |
+| 2 | agent + Opus 4.6 | 80.80 | Anthropic | 2026-03-05 | [Anthropic](https://www.anthropic.com/) |
+| 3 | GPT-5.2 | 80.00 | OpenAI | 2026-02-17 | [OpenAI](https://openai.com/) |
+| 4 | Sonnet 4.6 | 79.60 | Anthropic | 2026-02-17 | [Anthropic](https://www.anthropic.com/) |
 | 5 | 🆕 live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 | live-SWE-agent | 2025-12-15 | [SWE-bench](https://www.swebench.com/verified.html) |
 | 6 | 🆕 Sonar Foundation Agent + Claude 4.5 Opus | 79.20 | Perplexity | 2025-12-05 | [SWE-bench](https://www.swebench.com/verified.html) |
 | 7 | TRAE + Doubao-Seed-Code | 78.80 | TRAE | 2025-09-28 | [SWE-bench](https://www.swebench.com/verified.html) |
