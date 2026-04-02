@@ -130,16 +130,49 @@ WeCode does not depend on a fixed planner-worker template. The coordination laye
 
 WeCode now posts **86.9%** and holds **#1** in this public benchmark snapshot. The point is not only raw model quality. The point is that collaboration architecture materially changes how well the system handles broad, messy engineering tasks.
 
-| Rank | System | % Resolved |
-|---:|---|---:|
-| **1** | **WeCode (multi-agent on Codex)** | **86.90** |
-| 2 | Opus 4.5 | 80.90 |
-| 3 | Opus 4.6 | 80.80 |
-| 4 | GPT-5.2 (all models) | 80.00 |
-| 5 | Sonnet 4.5 | 77.20 |
-| 6 | Gemini 3 Pro | 76.20 |
+Evidence:
+[for_github_public.zip](./for_github_public.zip)
 
-> Competitor scores in this snapshot were updated from the user-provided comparison image on April 2, 2026.
+| Rank | Model | % Resolved | Org | Date | Site |
+|---:|---|---:|---|---|---|
+| **1** | **WeCode (multi-agent on Codex)** | **86.90** | **WeCode** | **2026-04-02** | **[Evidence](./for_github_public.zip)** |
+| 2 | agent + Opus 4.6 | 80.80 | Anthropic | 2026-04-02 | [Anthropic](https://www.anthropic.com/) |
+| 3 | GPT-5.2 | 80.00 | OpenAI | 2026-04-02 | [OpenAI](https://openai.com/) |
+| 4 | Sonnet 4.6 | 79.60 | Anthropic | 2026-04-02 | [Anthropic](https://www.anthropic.com/) |
+| 5 | 🆕 live-SWE-agent + Claude 4.5 Opus medium (20251101) | 79.20 | live-SWE-agent | 2025-12-15 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 6 | 🆕 Sonar Foundation Agent + Claude 4.5 Opus | 79.20 | Perplexity | 2025-12-05 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 7 | TRAE + Doubao-Seed-Code | 78.80 | TRAE | 2025-09-28 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 8 | 🆕 live-SWE-agent + Gemini 3 Pro Preview (2025-11-18) | 77.40 | live-SWE-agent | 2025-11-20 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 9 | Atlassian Rovo Dev (2025-09-02) | 76.80 | Atlassian | 2025-09-02 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 10 | EPAM AI/Run Developer Agent v20250719 + Claude 4 Sonnet | 76.80 | EPAM | 2025-08-04 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 11 | 🆕 mini-SWE-agent + Claude 4.5 Opus (high reasoning) | 76.80 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 12 | ACoder | 76.40 | ACoder | 2025-08-19 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 13 | 🆕 mini-SWE-agent + Gemini 3 Flash (high reasoning) | 75.80 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 14 | 🆕 mini-SWE-agent + MiniMax M2.5 (high reasoning) | 75.80 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 15 | Warp | 75.60 | Warp | 2025-09-01 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 16 | 🆕 mini-SWE-agent + Claude Opus 4.6 | 75.60 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 17 | TRAE + Claude Sonnet 4 + Opus 4 + Sonnet 3.7 + Gemini 2.5 Pro | 75.20 | TRAE | 2025-06-12 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 18 | Harness AI | 74.80 | Harness | 2025-07-31 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 19 | 🆕 Sonar Foundation Agent + Claude 4.5 Sonnet | 74.80 | Perplexity | 2025-11-03 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 20 | Lingxi-v1.5_claude-4-sonnet-20250514 | 74.60 | Lingxi | 2025-07-20 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 21 | JoyCode + Claude 4 Sonnet + GPT-4.1 | 74.60 | JoyCode | 2025-09-15 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 22 | Refact.ai Agent + Claude 4 Sonnet + o4-mini | 74.40 | Refact.ai | 2025-06-03 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 23 | 🆕 Prometheus-v1.2.1 + GPT-5 | 74.40 | Prometheus | 2025-10-15 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 24 | 🆕 mini-SWE-agent + Claude 4.5 Opus medium (20251101) | 74.40 | mini-SWE-agent | 2025-11-24 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 25 | 🆕 mini-SWE-agent + Gemini 3 Pro Preview (2025-11-18) | 74.20 | mini-SWE-agent | 2025-11-18 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 26 | 🆕 Salesforce AI Research SAGE (OpenHands) | 73.80 | Salesforce | 2025-11-03 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 27 | Tools + Claude 4 Opus (2025-05-22) | 73.20 | Tools | 2025-05-22 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 28 | 🆕 Salesforce AI Research SAGE (bash-only) | 73.00 | Salesforce | 2025-10-21 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 29 | 🆕 mini-SWE-agent + GPT-5-2 Codex | 72.80 | mini-SWE-agent | 2026-02-19 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 30 | 🆕 mini-SWE-agent + GLM-5 (high reasoning) | 72.80 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 31 | 🆕 mini-SWE-agent + GPT-5-2 (high reasoning) | 72.80 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 32 | Tools + Claude 4 Sonnet (2025-05-22) | 72.40 | Tools | 2025-05-22 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 33 | OpenHands + GPT-5 | 71.80 | OpenHands | 2025-08-07 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 34 | 🆕 mini-SWE-agent + GPT-5.2 (2025-12-11) (high reasoning) | 71.80 | mini-SWE-agent | 2025-12-11 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 35 | 🆕 mini-SWE-agent + Claude 4.5 Sonnet (high reasoning) | 71.40 | mini-SWE-agent | 2026-02-17 | [SWE-bench](https://www.swebench.com/verified.html) |
+| 36 | Prometheus-v1.2 + GPT-5 | 71.20 | Prometheus | 2025-09-29 | [SWE-bench](https://www.swebench.com/verified.html) |
+
+> WeCode links to the local evidence bundle above. The added `agent + Opus 4.6`, `GPT-5.2`, and `Sonnet 4.6` rows link to official model sites. The remaining rows link to the SWE-bench Verified leaderboard source.
 
 ## Quick Start
 
